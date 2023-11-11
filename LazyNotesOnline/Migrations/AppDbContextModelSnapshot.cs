@@ -27,8 +27,8 @@ namespace LazyNotesOnline.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Cat_Id")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Cat_Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cat_Title")
                         .IsRequired()
@@ -38,7 +38,36 @@ namespace LazyNotesOnline.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("NoteCategory");
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("LazyNotesOnline.Models.NoteContent", b =>
+                {
+                    b.Property<Guid>("Content_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Cat_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Turinys");
+
+                    b.Property<DateTime>("ContentCreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("NoteContentContent_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Content_Id");
+
+                    b.HasIndex("Cat_Id");
+
+                    b.HasIndex("NoteContentContent_Id");
+
+                    b.ToTable("Contents");
                 });
 
             modelBuilder.Entity("LazyNotesOnline.Models.User", b =>
@@ -72,7 +101,7 @@ namespace LazyNotesOnline.Migrations
                     b.HasIndex("NickName")
                         .IsUnique();
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("LazyNotesOnline.Models.NoteCategory", b =>
@@ -84,6 +113,31 @@ namespace LazyNotesOnline.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("LazyNotesOnline.Models.NoteContent", b =>
+                {
+                    b.HasOne("LazyNotesOnline.Models.NoteCategory", "NoteCategory")
+                        .WithMany("NoteContents")
+                        .HasForeignKey("Cat_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LazyNotesOnline.Models.NoteContent", null)
+                        .WithMany("AllNotes")
+                        .HasForeignKey("NoteContentContent_Id");
+
+                    b.Navigation("NoteCategory");
+                });
+
+            modelBuilder.Entity("LazyNotesOnline.Models.NoteCategory", b =>
+                {
+                    b.Navigation("NoteContents");
+                });
+
+            modelBuilder.Entity("LazyNotesOnline.Models.NoteContent", b =>
+                {
+                    b.Navigation("AllNotes");
                 });
 
             modelBuilder.Entity("LazyNotesOnline.Models.User", b =>
