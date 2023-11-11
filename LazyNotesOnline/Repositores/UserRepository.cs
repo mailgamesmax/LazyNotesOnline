@@ -6,12 +6,13 @@ namespace LazyNotesOnline.Repositores
 {
     public class UserRepository : IUserRepository
     {
-        public User CreateUser(string newUserName, string password)
+        public User CreateUser(string newUserName, string newNickName, string password)
         {
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             var acc = new User
             {
                 Name = newUserName,
+                NickName = newNickName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 Role = Role.DefaultUser

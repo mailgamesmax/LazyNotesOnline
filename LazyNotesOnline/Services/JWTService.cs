@@ -8,11 +8,11 @@ namespace LazyNotesOnline.Services
 {
     public class JWTService : IJwtService
     {
-        public string GetJwtToken(string userName, Role role)
+        public string GetJwtToken(string nameOrNickName, Role role)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, userName),
+                new Claim(ClaimTypes.Name, nameOrNickName),
                 new Claim(ClaimTypes.Role, role.ToString())
             };
 

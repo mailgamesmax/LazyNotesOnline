@@ -9,6 +9,7 @@ namespace LazyNotesOnline
     public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }        
+        public DbSet<User> Categories { get; set; }        
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
@@ -18,10 +19,23 @@ namespace LazyNotesOnline
         {
             modelBuilder
                 .Entity<User>()
+                .HasIndex(u => u.NickName)
+                .IsUnique();
+
+            modelBuilder
+                .Entity<User>()
                 .Property(e => e.Role)
                 .HasConversion(
                     v => v.ToString(),
                     v => (Role)Enum.Parse(typeof(Role), v));
+
+            // user-cat 1toM
+            modelBuilder
+                .Entity<User>()
+                .HasMany(u => u.UserNoteCategories)
+                .WithOne(n => n.User)
+                .HasForeignKey(k => k.Id);
         }
+
     }
 }

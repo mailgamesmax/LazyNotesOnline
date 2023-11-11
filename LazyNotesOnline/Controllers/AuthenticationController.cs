@@ -13,6 +13,7 @@ namespace LazyNotesOnline.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        // autorization test
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = (nameof(Role.DefaultUser) + "," + nameof(Role.Admin)))]
         [HttpGet(template: "TouchMeIfYouAreАuthenticated !")]
         public ActionResult<string> BeNiceForAutetified()
@@ -22,22 +23,29 @@ namespace LazyNotesOnline.Controllers
         }
 
         [HttpPost(template: ("SignUpNewUser"))]
-        public IActionResult SignUpNewClient([FromBody] SignUpNewUserRequest request)
+        public async Task<IActionResult> SignUpNewClient([FromBody] SignUpNewUserRequest request)
         {
-            var newAcc = _loginService.SignupNewUser(request.Username, request.Password);
-            return Ok(newAcc);
+            var newAcc = await _loginService.SignupNewUser(request.Username, request.NickName, request.Password);
+            if (newAcc.Item1 == false)
+            {
+                //return BadRequest("NickName is not availible");
+                return StatusCode(400, "requested NickName is not availible");
+            }
+            else
+            {
+            return Ok(newAcc.Item2);
+            }
         }
-
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = (nameof(Role.UserClient) + "," + nameof(Role.Admin)))]
+        
         [HttpPost(template: "UserLogin")]
         public IActionResult UserLogin([FromBody] LoginRequest request)
         {
-            var response = _loginService.UserLogin(request.Username, request.Password);
+            var response = _loginService.UserLogin(request.NickName, request.Password);
             if (!response.IsUserExist)
             {
                 return Unauthorized();
             }
-            return Ok(_jwtService.GetJwtToken(request.Username, (Role)response.Role));            
+            return Ok(_jwtService.GetJwtToken(request.NickName, (Role)response.Role));            
         }
         // GET: api/<AuthenticationController>
         [HttpGet]
