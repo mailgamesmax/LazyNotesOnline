@@ -32,11 +32,27 @@ namespace LazyNotesOnline
                     v => (Role)Enum.Parse(typeof(Role), v));
 
             // user-cat 1toM
+            /*            modelBuilder
+                            .Entity<User>()
+                            .HasMany(u => u.UserNoteCategories)
+                            .WithOne(n => n.User)
+                            .HasForeignKey(k => k.Id)
+                            .OnDelete(DeleteBehavior.Cascade);*/
+
+            /*            modelBuilder
+                            .Entity<NoteCategory>()
+                            .HasOne<User>(u => u.User)
+                            .WithMany(c => c.UserNoteCategories)
+                            .HasForeignKey(k => k.UserId)
+                            .OnDelete(DeleteBehavior.Cascade);
+            */
+
             modelBuilder
                 .Entity<User>()
-                .HasMany(u => u.UserNoteCategories)
-                .WithOne(n => n.User)
-                .HasForeignKey(k => k.Id);
+                .HasMany<NoteCategory>(u => u.UserNoteCategories)
+                .WithOne(c => c.User)
+                .HasForeignKey(k => k.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // catTitle-catContent 1toM
             modelBuilder

@@ -15,6 +15,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 builder.Services.AddScoped<IUserLoginAndCreateService, UserLoginAndCreateService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<INoteCategoryCreationService, NoteCategoryCreationService>();
+builder.Services.AddScoped<INoteCategoryRepository, NoteCategoryRepository>();
 
 builder.Services.AddScoped<IJwtService, JWTService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

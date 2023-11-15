@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\reposD\\webAPI\\LazyNotesOnline\\LazyNotesOnline\\LazyNotesOnline.csproj": {}
+    "D:\\reposD\\webAPI\\LazyNotesOnline23 1114ok\\LazyNotesOnline\\LazyNotesOnline.csproj": {}
   },
   "projects": {
-    "D:\\reposD\\webAPI\\LazyNotesOnline\\LazyNotesOnline\\LazyNotesOnline.csproj": {
+    "D:\\reposD\\webAPI\\LazyNotesOnline23 1114ok\\LazyNotesOnline\\LazyNotesOnline.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\reposD\\webAPI\\LazyNotesOnline\\LazyNotesOnline\\LazyNotesOnline.csproj",
+        "projectUniqueName": "D:\\reposD\\webAPI\\LazyNotesOnline23 1114ok\\LazyNotesOnline\\LazyNotesOnline.csproj",
         "projectName": "LazyNotesOnline",
-        "projectPath": "D:\\reposD\\webAPI\\LazyNotesOnline\\LazyNotesOnline\\LazyNotesOnline.csproj",
+        "projectPath": "D:\\reposD\\webAPI\\LazyNotesOnline23 1114ok\\LazyNotesOnline\\LazyNotesOnline.csproj",
         "packagesPath": "C:\\Users\\Maxx\\.nuget\\packages\\",
-        "outputPath": "D:\\reposD\\webAPI\\LazyNotesOnline\\LazyNotesOnline\\obj\\",
+        "outputPath": "D:\\reposD\\webAPI\\LazyNotesOnline23 1114ok\\LazyNotesOnline\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

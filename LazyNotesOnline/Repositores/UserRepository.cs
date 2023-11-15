@@ -26,10 +26,22 @@ namespace LazyNotesOnline.Repositores
             passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
         }
 
-        public async Task<User> UserById(Guid id)
+        public async Task<Guid> GetUserIdByNickname(string nickName)
         {
-            return await _appDbContext.Users.SingleAsync(a => a.Id == id);
+            var userId = await _appDbContext.Users
+                .Where(a => a.NickName == nickName)
+                .Select(a => a.Id)
+                .SingleOrDefaultAsync();
+
+            return userId;
         }
+
+        public async Task<User> GetFullUserByNickname(string nickName)
+        {
+            User user = await _appDbContext.Users.FirstOrDefaultAsync(n => n.NickName == nickName);
+            return user;
+        }
+
 
 
         //
@@ -39,6 +51,5 @@ namespace LazyNotesOnline.Repositores
             _appDbContext = dbContext;
         }
 
-        public UserRepository() { }
     }
 }

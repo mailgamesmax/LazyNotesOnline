@@ -4,6 +4,7 @@ using LazyNotesOnline;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LazyNotesOnline.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231113184807_newCategoryCreationFixed")]
+    partial class newCategoryCreationFixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,8 +27,10 @@ namespace LazyNotesOnline.Migrations
 
             modelBuilder.Entity("LazyNotesOnline.Models.NoteCategory", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("Cat_Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cat_Title")
@@ -34,12 +39,7 @@ namespace LazyNotesOnline.Migrations
                         .HasColumnType("nvarchar(150)")
                         .HasColumnName("Įrašo kategorija");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Cat_Id");
-
-                    b.HasIndex("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
                 });
@@ -111,7 +111,7 @@ namespace LazyNotesOnline.Migrations
                 {
                     b.HasOne("LazyNotesOnline.Models.User", "User")
                         .WithMany("UserNoteCategories")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

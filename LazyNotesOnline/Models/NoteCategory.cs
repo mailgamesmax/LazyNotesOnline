@@ -5,6 +5,7 @@ namespace LazyNotesOnline.Models
 {
     public class NoteCategory
     {
+        [Key]
         public Guid Cat_Id { get; set; } = Guid.NewGuid();
 
         [Column("Įrašo kategorija")]
@@ -15,8 +16,8 @@ namespace LazyNotesOnline.Models
         // [Column("Ownet of notification")]
         //public string Name { get; set; }
 
-        [ForeignKey("OwnerID")]
-        public Guid Id { get; set; }
+        [ForeignKey("UserID")]
+        public Guid UserId { get; set; }
         public User User { get; set; }
 
         public IList<NoteContent> NoteContents{ get; set; } = new List<NoteContent>();

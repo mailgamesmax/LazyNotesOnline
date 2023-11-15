@@ -4,8 +4,8 @@ namespace LazyNotesOnline.Repositores
 {
     public interface INoteCategoryRepository
     {
-        public NoteCategory CreateNoteCategory(string userName, string newCategoryTitle);
-        public NoteCategory RenameNoteCategory(string userName, string newCategoryTitle);
-        public NoteCategory DeleteNoteCategory(string userName, string newCategoryTitle);
+        Task<NoteCategory> CreateNoteCategory(User user, string newCategoryTitle);
+        //public NoteCategory RenameNoteCategory(string nickName, string newCategoryTitle);
+        //public NoteCategory DeleteNoteCategory(string nickName, string newCategoryTitle);
     }
 }

@@ -5,8 +5,11 @@ namespace LazyNotesOnline.Repositores
 {
     public interface IUserRepository
     {
-        public User CreateUser(string newUserName, string newNickName, string password);
+        User CreateUser(string newUserName, string newNickName, string password);
 
-        public Task<User> UserById(Guid id);
+        //public Task<User> UserById(Guid id);
+
+        Task<Guid> GetUserIdByNickname(string nickName);
+        Task<User> GetFullUserByNickname(string nickName);
     }
 }

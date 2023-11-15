@@ -30,14 +30,13 @@ namespace LazyNotesOnline.Services
         public async Task<(bool, User)> SignupNewUser(string userName, string newNickName, string password) //2
         {
 
-            var nickNameExistAlready = _appDbContext.Users.Any(u => u.NickName == newNickName);
-            if (nickNameExistAlready)
+            var nickNameExistAlready = await _userRepository.GetFullUserByNickname(userName);
+            if (nickNameExistAlready != null)
             {
                 return (false, null);
             }
 
-            var userRepository = new UserRepository();
-            var acc = userRepository.CreateUser(userName, newNickName, password);
+            var acc = _userRepository.CreateUser(userName, newNickName, password);
             _appDbContext.Users.Add(acc);
             await _appDbContext.SaveChangesAsync();
             return (true, acc);
@@ -46,10 +45,12 @@ namespace LazyNotesOnline.Services
 
         //
         private readonly AppDbContext _appDbContext;
+        private readonly IUserRepository _userRepository;
 
-        public UserLoginAndCreateService(AppDbContext appDbContext)
+        public UserLoginAndCreateService(AppDbContext appDbContext, IUserRepository userRepository)
         {
             _appDbContext = appDbContext;
+            _userRepository = userRepository;
         }
 
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nkZkcV13q95AY6JaDSP7qXwFUvnXhGDD+x2Dz7aPiwxVjYm86CdAozOibIVN+IsTgPxnsMnsCOwQDXMQ1iAuBQ==",
+  "dgSpecHash": "7pQsYag+oxBIer4HtvuVUtfe4YTzyQ+V9R9QDGFKW/U362XxGZNWAGrzVyDkfUNFALGrQbEh+a5cg+jGR0O72Q==",
   "success": true,
-  "projectFilePath": "D:\\reposD\\webAPI\\LazyNotesOnline\\LazyNotesOnline\\LazyNotesOnline.csproj",
+  "projectFilePath": "D:\\reposD\\webAPI\\LazyNotesOnline23 1114ok\\LazyNotesOnline\\LazyNotesOnline.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Maxx\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Maxx\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
